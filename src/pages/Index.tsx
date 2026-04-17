@@ -1,27 +1,7 @@
-import {
-  Hero,
-  About,
-  TechStack,
-  Projects,
-  Testimonials,
-  Contact,
-  Footer,
-  Navbar,
-} from "@/components/landing"
-
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <TechStack />
-        <Projects />
-        <Testimonials />
-        <Contact />
-      </main>
-      <Footer />
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <p className="text-muted-foreground text-lg">Сайт пуст. Опиши, что создать — и я сделаю!</p>
     </div>
   )
 }
