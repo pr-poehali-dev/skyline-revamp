@@ -33,12 +33,12 @@ export default function Navbar() {
   return (
     <header className={cn(
       "fixed top-0 w-full z-50 transition-all duration-300",
-      scrolled ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-primary/20" : "bg-transparent"
+      scrolled ? "bg-background/98 backdrop-blur-md border-b border-primary/30 shadow-[0_1px_20px_rgba(180,0,0,0.2)]" : "bg-transparent"
     )}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <button onClick={() => scrollToSection("home")} className="flex items-center gap-2">
-            <span className="text-2xl font-black tracking-widest text-foreground" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <span className="text-2xl font-black tracking-widest text-foreground nen-text">
               RED<span className="text-primary">4</span>N
             </span>
           </button>

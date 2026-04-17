@@ -42,8 +42,10 @@ export default function About() {
   ]
 
   return (
-    <section id="about" className="py-24 bg-secondary/50 relative overflow-hidden">
-      <div className="spider-web opacity-50" />
+    <section id="about" className="py-24 bg-secondary relative overflow-hidden">
+      <div className="spider-web" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
@@ -72,7 +74,7 @@ export default function About() {
               transition={{ duration: 0.4, delay: i * 0.08 }}
               variants={fadeIn}
             >
-              <div className="bg-card border border-border card-hover rounded-sm p-6 h-full">
+              <div className="bg-card border border-border card-hover rounded-sm p-6 h-full crack-border">
                 <div className="bg-primary/10 w-12 h-12 rounded-sm flex items-center justify-center mb-4 border border-primary/20">
                   <Icon name={item.icon} className="h-6 w-6 text-primary" />
                 </div>

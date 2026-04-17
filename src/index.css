@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,66 +6,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 8%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
-    --primary: 0 90% 50%;
+    --background: 0 20% 4%;
+    --foreground: 0 10% 92%;
+    --card: 0 15% 7%;
+    --card-foreground: 0 10% 92%;
+    --popover: 0 15% 7%;
+    --popover-foreground: 0 10% 92%;
+    --primary: 0 95% 45%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 94%;
-    --secondary-foreground: 0 0% 10%;
-    --muted: 0 0% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 90% 50%;
+    --secondary: 0 15% 10%;
+    --secondary-foreground: 0 10% 85%;
+    --muted: 0 12% 12%;
+    --muted-foreground: 0 8% 55%;
+    --accent: 0 95% 45%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
-    --ring: 0 90% 50%;
-    --radius: 0.25rem;
+    --border: 0 20% 16%;
+    --input: 0 20% 16%;
+    --ring: 0 95% 45%;
+    --radius: 0.15rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 0 90% 50%;
+    --sidebar-background: 0 15% 5%;
+    --sidebar-foreground: 0 10% 90%;
+    --sidebar-primary: 0 95% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 94%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 0 0% 88%;
-    --sidebar-ring: 0 90% 50%;
-  }
-
-  .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 90% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 0 90% 50%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 40%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 90% 50%;
-
-    --sidebar-background: 0 0% 7%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 0 90% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 0 90% 50%;
+    --sidebar-accent: 0 15% 10%;
+    --sidebar-accent-foreground: 0 10% 85%;
+    --sidebar-border: 0 20% 16%;
+    --sidebar-ring: 0 95% 45%;
   }
 }
 
@@ -77,21 +46,129 @@
   body {
     @apply bg-background text-foreground;
     font-family: "Rajdhani", sans-serif;
+    background-color: #0d0404;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: "Orbitron", sans-serif;
+    font-family: "Cinzel", serif;
+    letter-spacing: 0.05em;
   }
 }
 
-/* Typing cursor blink */
+/* === BLOOD BACKGROUND === */
+.blood-bg {
+  position: relative;
+  background-color: #0a0202;
+  background-image: url("https://cdn.poehali.dev/projects/624cb9fa-8145-4312-a462-40d3b85c601b/files/b5260759-9a18-4dbe-9d67-bcea6c409377.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.blood-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 1, 1, 0.72);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Blood drip animation */
+.blood-drip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #8b0000 15%,
+    #cc0000 30%,
+    #8b0000 45%,
+    transparent 50%,
+    #cc0000 65%,
+    #8b0000 80%,
+    transparent 100%
+  );
+  filter: blur(0.5px);
+}
+
+.blood-drip::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(
+    180deg,
+    rgba(140, 0, 0, 0.35) 0%,
+    transparent 100%
+  );
+}
+
+/* === HxH NEN AURA === */
+.nen-glow {
+  box-shadow:
+    0 0 15px rgba(180, 0, 0, 0.6),
+    0 0 40px rgba(180, 0, 0, 0.25),
+    inset 0 0 20px rgba(180, 0, 0, 0.05);
+}
+
+.nen-text {
+  text-shadow:
+    0 0 10px rgba(220, 0, 0, 0.9),
+    0 0 30px rgba(180, 0, 0, 0.5),
+    0 0 60px rgba(140, 0, 0, 0.3);
+}
+
+/* === SPIDER WEB === */
+.spider-web {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      ellipse at 20% 20%,
+      rgba(140, 0, 0, 0.06) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 80%,
+      rgba(140, 0, 0, 0.06) 0%,
+      transparent 60%
+    ),
+    linear-gradient(rgba(140, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 0, 0, 0.05) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    50px 50px,
+    50px 50px;
+  pointer-events: none;
+}
+
+/* === CARD HOVER === */
+.card-hover {
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+}
+.card-hover:hover {
+  border-color: hsl(0 95% 45% / 0.5);
+  box-shadow: 0 0 25px rgba(180, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* === BLINK CURSOR === */
 .animate-blink {
   animation: blink 1s step-end infinite;
 }
-
 @keyframes blink {
   from,
   to {
@@ -102,44 +179,21 @@
   }
 }
 
-/* Spider web lines */
-.spider-web {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(220, 0, 0, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(220, 0, 0, 0.07) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
+/* === BLOOD PULSE === */
+@keyframes blood-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.blood-pulse {
+  animation: blood-pulse 3s ease-in-out infinite;
 }
 
-/* Red glow */
-.red-glow {
-  box-shadow:
-    0 0 20px rgba(220, 0, 0, 0.4),
-    0 0 60px rgba(220, 0, 0, 0.15);
-}
-
-.red-glow-text {
-  text-shadow: 0 0 20px rgba(220, 0, 0, 0.5);
-}
-
-/* Scanline effect */
-.scanlines::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
-  pointer-events: none;
-}
-
-/* Smooth scrolling */
+/* === SCROLL === */
 html {
   scroll-behavior: smooth;
 }
@@ -148,13 +202,15 @@ html {
   @apply max-w-7xl mx-auto;
 }
 
-/* Card hover red border */
-.card-hover {
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+/* Anime crack lines */
+.crack-border {
+  position: relative;
 }
-.card-hover:hover {
-  border-color: hsl(0 90% 50% / 0.6);
-  box-shadow: 0 0 20px rgba(220, 0, 0, 0.15);
+.crack-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(180, 0, 0, 0.2);
+  clip-path: polygon(0 0, 97% 0, 100% 3%, 100% 100%, 3% 100%, 0 97%);
+  pointer-events: none;
 }

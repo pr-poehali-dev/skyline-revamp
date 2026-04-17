@@ -63,8 +63,9 @@ export default function Projects() {
   ]
 
   return (
-    <section id="products" className="py-24 bg-secondary/50 relative overflow-hidden">
-      <div className="spider-web opacity-30" />
+    <section id="products" className="py-24 bg-secondary relative overflow-hidden">
+      <div className="spider-web" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
@@ -101,14 +102,14 @@ export default function Projects() {
                   </span>
                 </div>
               )}
-              <div className={`bg-card border-2 ${plan.color} rounded-sm p-6 h-full flex flex-col ${plan.popular ? "red-glow" : ""}`}>
+              <div className={`bg-card border-2 ${plan.color} rounded-sm p-6 h-full flex flex-col crack-border ${plan.popular ? "nen-glow" : ""}`}>
                 <div className="mb-6">
                   <h3 className="font-black uppercase tracking-widest text-lg text-foreground mb-1">{plan.name}</h3>
                   <p className="text-xs text-muted-foreground">{plan.desc}</p>
                 </div>
 
                 <div className="mb-6">
-                  <span className="text-5xl font-black text-primary" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+                  <span className="text-5xl font-black text-primary nen-text">
                     {plan.price}₽
                   </span>
                   <span className="text-muted-foreground text-sm ml-1">{plan.period}</span>

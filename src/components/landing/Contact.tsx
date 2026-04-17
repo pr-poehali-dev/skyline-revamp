@@ -38,8 +38,9 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-24 bg-secondary/50 relative overflow-hidden">
-      <div className="spider-web opacity-40" />
+    <section id="contact" className="py-24 bg-secondary relative overflow-hidden">
+      <div className="spider-web" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
@@ -103,7 +104,7 @@ export default function Contact() {
           variants={fadeIn}
           className="max-w-2xl mx-auto text-center"
         >
-          <div className="bg-card border border-primary/20 rounded-sm p-8 red-glow">
+          <div className="bg-card border border-primary/20 rounded-sm p-8 nen-glow crack-border">
             <img
               src="https://cdn.poehali.dev/projects/624cb9fa-8145-4312-a462-40d3b85c601b/files/ad015d0d-247b-494b-ae78-db5802fe4f54.jpg"
               alt="Red4n Spider"
