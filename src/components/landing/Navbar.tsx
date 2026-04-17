@@ -8,10 +8,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-
+    const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -20,72 +17,67 @@ export default function Navbar() {
     setIsOpen(false)
     const element = document.getElementById(sectionId)
     if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      })
+      window.scrollTo({ top: element.getBoundingClientRect().top + window.pageYOffset, behavior: "smooth" })
     }
   }
 
   const navLinks = [
     { name: "Главная", href: "home" },
-    { name: "Обо мне", href: "about" },
-    { name: "Навыки", href: "tech-stack" },
-    { name: "Проекты", href: "projects" },
+    { name: "О нас", href: "about" },
+    { name: "Функции", href: "features" },
+    { name: "Продукты", href: "products" },
     { name: "Отзывы", href: "testimonials" },
     { name: "Контакты", href: "contact" },
   ]
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : "bg-transparent",
-      )}
-    >
+    <header className={cn(
+      "fixed top-0 w-full z-50 transition-all duration-300",
+      scrolled ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-primary/20" : "bg-transparent"
+    )}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <button onClick={() => scrollToSection("home")} className="text-2xl font-bold text-primary">
-            Dev<span className="text-destructive">Craft</span>
+          <button onClick={() => scrollToSection("home")} className="flex items-center gap-2">
+            <span className="text-2xl font-black tracking-widest text-foreground" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+              RED<span className="text-primary">4</span>N
+            </span>
           </button>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors text-sm font-semibold tracking-wider uppercase"
               >
                 {link.name}
               </button>
             ))}
-            <Button>Резюме</Button>
+            <Button className="bg-primary hover:bg-primary/90 text-white font-bold tracking-wider uppercase text-sm red-glow">
+              Купить
+            </Button>
           </nav>
 
-          {/* Mobile Navigation Toggle */}
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X /> : <Menu />}
           </Button>
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
       {isOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md">
+        <div className="md:hidden bg-background/98 border-b border-primary/20 backdrop-blur-md">
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-muted-foreground hover:text-foreground transition-colors py-2 text-left"
+                  className="text-muted-foreground hover:text-primary transition-colors py-2 text-left font-semibold tracking-wider uppercase"
                 >
                   {link.name}
                 </button>
               ))}
-              <Button className="w-full">Резюме</Button>
+              <Button className="w-full bg-primary text-white font-bold">Купить</Button>
             </nav>
           </div>
         </div>

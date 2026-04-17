@@ -1,103 +1,37 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { Code2, Layout, Server, Database, Wrench, Binary } from "lucide-react"
+import Icon from "@/components/ui/icon"
 
 export default function TechStack() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-
-  const technologies = {
-    languages: {
-      icon: <Code2 className="h-6 w-6" />,
-      title: "Языки программирования",
-      description: "Основные языки для системной и прикладной разработки",
-      skills: [
-        { name: "C++", level: 90 },
-        { name: "C", level: 85 },
-        { name: "Java", level: 88 },
-        { name: "Ruby", level: 82 },
-        { name: "Python", level: 85 },
-        { name: "TypeScript", level: 90 },
-        { name: "JavaScript", level: 90 },
-      ],
-    },
-    concepts: {
-      icon: <Binary className="h-6 w-6" />,
-      title: "Инженерные концепции",
-      description: "Фундаментальные принципы разработки ПО",
-      skills: [
-        { name: "Структуры данных", level: 95 },
-        { name: "Алгоритмы", level: 90 },
-        { name: "ООП", level: 95 },
-        { name: "Паттерны", level: 85 },
-        { name: "Системный дизайн", level: 80 },
-        { name: "Многопоточность", level: 85 },
-      ],
-    },
-    frontend: {
-      icon: <Layout className="h-6 w-6" />,
-      title: "Frontend-разработка",
-      description: "Современные технологии веб-разработки",
-      skills: [
-        { name: "React", level: 90 },
-        { name: "Next.js", level: 85 },
-        { name: "HTML/CSS", level: 95 },
-        { name: "Tailwind CSS", level: 95 },
-        { name: "Redux", level: 85 },
-        { name: "WebGL", level: 75 },
-      ],
-    },
-    backend: {
-      icon: <Server className="h-6 w-6" />,
-      title: "Backend-разработка",
-      description: "Серверные фреймворки и технологии",
-      skills: [
-        { name: "Node.js", level: 85 },
-        { name: "Express", level: 80 },
-        { name: "Spring Boot", level: 85 },
-        { name: "Ruby on Rails", level: 80 },
-      ],
-    },
-    database: {
-      icon: <Database className="h-6 w-6" />,
-      title: "Базы данных",
-      description: "Управление и оптимизация БД",
-      skills: [
-        { name: "MongoDB", level: 85 },
-        { name: "PostgreSQL", level: 80 },
-        { name: "MySQL", level: 75 },
-        { name: "Redis", level: 70 },
-      ],
-    },
-    tools: {
-      icon: <Wrench className="h-6 w-6" />,
-      title: "Инструменты",
-      description: "Инструменты и среды разработки",
-      skills: [
-        { name: "Git", level: 90 },
-        { name: "Docker", level: 80 },
-        { name: "AWS", level: 75 },
-        { name: "Linux/Unix", level: 85 },
-        { name: "CMake", level: 80 },
-        { name: "Visual Studio", level: 85 },
-      ],
-    },
-  }
+  const [active, setActive] = useState<string | null>(null)
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   }
 
-  const scaleUp = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1 },
-  }
+  const cs2Features = [
+    { name: "Aimbot", desc: "Плавный или жёсткий. Настраиваемый FOV, скорость, кости.", icon: "Crosshair" },
+    { name: "Wallhack (ESP)", desc: "Видишь врагов сквозь стены — модели, кости, дистанция, HP.", icon: "Eye" },
+    { name: "Triggerbot", desc: "Автовыстрел при наведении на врага. Задержка настраивается.", icon: "Target" },
+    { name: "No Recoil", desc: "Полное подавление отдачи для любого оружия.", icon: "Minus" },
+    { name: "Radar Hack", desc: "Показывает всех врагов на миникарте в реальном времени.", icon: "Map" },
+    { name: "Bhop / Speed", desc: "Автоматический банни-хоп и ускорение передвижения.", icon: "Wind" },
+  ]
+
+  const so2Features = [
+    { name: "Aimbot", desc: "Точный наводчик для любого оружия в Standoff 2.", icon: "Crosshair" },
+    { name: "ESP / Box", desc: "Видимость врагов через препятствия с бокс-оверлеем.", icon: "Eye" },
+    { name: "No Recoil", desc: "Стабильный прицел без разброса — убиваешь быстрее.", icon: "Minus" },
+    { name: "Speed Hack", desc: "Увеличение скорости движения персонажа.", icon: "Wind" },
+    { name: "Anti Ban", desc: "Встроенная защита от бана системы античита Standoff.", icon: "Shield" },
+    { name: "Skin Changer", desc: "Меняй скины оружий без реальной покупки.", icon: "Palette" },
+  ]
 
   return (
-    <section id="tech-stack" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="features" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -106,105 +40,79 @@ export default function TechStack() {
           variants={fadeIn}
           className="text-center mb-16"
         >
-          <Badge variant="outline" className="mb-4">
-            Навыки
+          <Badge variant="outline" className="mb-4 border-primary/40 text-primary uppercase tracking-widest text-xs">
+            Функционал
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Техническая экспертиза</h2>
-          <div className="w-20 h-1 bg-primary mx-auto"></div>
+          <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground">
+            ЧТО <span className="text-primary">ВХОДИТ</span> В СОФТ
+          </h2>
+          <div className="w-20 h-0.5 bg-primary mx-auto" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Object.entries(technologies).map(([key, category]) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {[
+            { id: "cs2", label: "CS2", color: "#e8a000", features: cs2Features },
+            { id: "so2", label: "Standoff 2", color: "#cc0000", features: so2Features },
+          ].map((game) => (
             <motion.div
-              key={key}
+              key={game.id}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              variants={scaleUp}
+              variants={fadeIn}
             >
-              <Card
-                className={`h-full cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                  selectedCategory === key ? "ring-2 ring-primary" : ""
-                }`}
-                onClick={() => setSelectedCategory(selectedCategory === key ? null : key)}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="bg-primary/10 p-3 rounded-full">{category.icon}</div>
-                    <div>
-                      <h3 className="text-lg font-semibold">{category.title}</h3>
-                      <p className="text-sm text-muted-foreground">{category.description}</p>
-                    </div>
-                  </div>
-
-                  <AnimatePresence>
-                    {selectedCategory === key && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="space-y-4"
-                      >
-                        {category.skills.map((skill, index) => (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="space-y-2"
+              <div className="border border-border rounded-sm overflow-hidden">
+                <div
+                  className="px-6 py-4 flex items-center gap-3 border-b border-border"
+                  style={{ background: `linear-gradient(90deg, ${game.color}15, transparent)` }}
+                >
+                  <div className="w-3 h-3 rounded-full" style={{ background: game.color }} />
+                  <h3 className="font-black uppercase tracking-widest text-lg text-foreground">{game.label}</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+                  {game.features.map((feat, i) => (
+                    <button
+                      key={feat.name}
+                      onClick={() => setActive(active === `${game.id}-${i}` ? null : `${game.id}-${i}`)}
+                      className="text-left p-4 border-b border-r border-border hover:bg-primary/5 transition-colors group"
+                    >
+                      <div className="flex items-center gap-3 mb-1">
+                        <Icon name={feat.icon} className="h-4 w-4 text-primary shrink-0" />
+                        <span className="font-bold text-sm uppercase tracking-wide text-foreground group-hover:text-primary transition-colors">
+                          {feat.name}
+                        </span>
+                      </div>
+                      <AnimatePresence>
+                        {active === `${game.id}-${i}` && (
+                          <motion.p
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="text-xs text-muted-foreground leading-relaxed mt-1"
                           >
-                            <div className="flex justify-between text-sm">
-                              <span className="font-medium">{skill.name}</span>
-                              <span className="text-muted-foreground">{skill.level}%</span>
-                            </div>
-                            <div className="w-full bg-muted rounded-full h-1.5">
-                              <motion.div
-                                initial={{ width: 0 }}
-                                animate={{ width: `${skill.level}%` }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="bg-primary h-1.5 rounded-full"
-                              />
-                            </div>
-                          </motion.div>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {selectedCategory !== key && (
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {category.skills.slice(0, 3).map((skill, index) => (
-                        <Badge key={index} variant="secondary">
-                          {skill.name}
-                        </Badge>
-                      ))}
-                      {category.skills.length > 3 && (
-                        <Badge variant="secondary">+{category.skills.length - 3} ещё</Badge>
-                      )}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                            {feat.desc}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
 
-        <motion.div
+        <motion.p
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5 }}
           variants={fadeIn}
-          className="mt-12 text-center text-muted-foreground"
+          className="text-center text-muted-foreground text-sm mt-8"
         >
-          <p className="max-w-2xl mx-auto">
-            Обширный опыт как в низкоуровневом системном программировании, так и в современной
-            веб-разработке позволяет применять комплексное понимание принципов инженерии ПО
-            в каждом проекте.
-          </p>
-        </motion.div>
+          Нажми на функцию, чтобы узнать подробнее
+        </motion.p>
       </div>
     </section>
   )

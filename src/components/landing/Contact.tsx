@@ -1,78 +1,46 @@
-import { useState, ChangeEvent, FormEvent } from "react"
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react"
+import Icon from "@/components/ui/icon"
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    toast({
-      title: "Сообщение отправлено!",
-      description: "Спасибо за ваше сообщение. Я свяжусь с вами в ближайшее время.",
-    })
-
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
-    setIsSubmitting(false)
-  }
-
-  const contactInfo = [
+  const contacts = [
     {
-      icon: <Mail className="h-6 w-6 text-primary" />,
-      title: "Email",
-      value: "hello@devcraft.example",
-      link: "mailto:hello@devcraft.example",
+      icon: "Send",
+      title: "Telegram-бот",
+      desc: "Купить ключ, получить помощь",
+      value: "@red4n_bot",
+      link: "https://t.me/red4n_bot",
+      cta: "Открыть бота",
     },
     {
-      icon: <Phone className="h-6 w-6 text-primary" />,
-      title: "Телефон",
-      value: "+7 (999) 123-45-67",
-      link: "tel:+79991234567",
+      icon: "MessageCircle",
+      title: "Discord сообщество",
+      desc: "12 000+ игроков, конфиги, гайды",
+      value: "discord.gg/red4n",
+      link: "https://discord.gg",
+      cta: "Войти в сервер",
     },
     {
-      icon: <MapPin className="h-6 w-6 text-primary" />,
-      title: "Локация",
-      value: "Москва, Россия",
-      link: null,
+      icon: "AtSign",
+      title: "Telegram канал",
+      desc: "Новости, обновления, акции",
+      value: "@red4n_official",
+      link: "https://t.me/red4n_official",
+      cta: "Подписаться",
     },
   ]
 
   return (
-    <section id="contact" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-24 bg-secondary/50 relative overflow-hidden">
+      <div className="spider-web opacity-40" />
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -81,134 +49,84 @@ export default function Contact() {
           variants={fadeIn}
           className="text-center mb-16"
         >
-          <Badge variant="outline" className="mb-4">
+          <Badge variant="outline" className="mb-4 border-primary/40 text-primary uppercase tracking-widest text-xs">
             Контакты
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Связаться со мной</h2>
-          <div className="w-20 h-1 bg-primary mx-auto"></div>
+          <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground">
+            СВЯЗАТЬСЯ <span className="text-primary">С НАМИ</span>
+          </h2>
+          <div className="w-20 h-0.5 bg-primary mx-auto mb-6" />
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Покупка, вопросы по установке, поддержка — всё через Telegram. Отвечаем быстро.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            variants={fadeIn}
-            className="lg:col-span-2"
-          >
-            <Card>
-              <CardContent className="p-6">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Ваше имя</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        placeholder="Иван Петров"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Ваш Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="ivan@example.com"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+          {contacts.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              variants={fadeIn}
+            >
+              <Card className="border-border card-hover rounded-sm text-center h-full">
+                <CardContent className="p-6 flex flex-col items-center h-full">
+                  <div className="bg-primary/10 w-14 h-14 rounded-sm flex items-center justify-center mb-4 border border-primary/20">
+                    <Icon name={c.icon} className="h-6 w-6 text-primary" />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Тема</Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      placeholder="Запрос по проекту"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Сообщение</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Хотел бы обсудить проект..."
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? "Отправка..." : "Отправить"}
+                  <h3 className="font-black uppercase tracking-wide text-sm text-foreground mb-1">{c.title}</h3>
+                  <p className="text-xs text-muted-foreground mb-3">{c.desc}</p>
+                  <p className="text-primary font-bold text-sm mb-4 flex-grow">{c.value}</p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full border-primary/30 hover:border-primary hover:bg-primary/5 font-bold uppercase tracking-wider text-xs"
+                    asChild
+                  >
+                    <a href={c.link} target="_blank" rel="noopener noreferrer">
+                      {c.cta}
+                    </a>
                   </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            variants={fadeIn}
-          >
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <Card key={index}>
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-primary/10 p-3 rounded-full">{info.icon}</div>
-                      <div>
-                        <h4 className="text-lg font-semibold mb-1">{info.title}</h4>
-                        {info.link ? (
-                          <a href={info.link} className="text-muted-foreground hover:text-primary transition-colors">
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-muted-foreground">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-
-              <Card className="mt-8">
-                <CardContent className="p-6">
-                  <h4 className="text-lg font-semibold mb-4">Подписаться</h4>
-                  <div className="flex gap-4">
-                    <Button variant="outline" size="icon" className="rounded-full" asChild>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                        <Linkedin className="h-5 w-5" />
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" className="rounded-full" asChild>
-                      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                        <Twitter className="h-5 w-5" />
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" className="rounded-full" asChild>
-                      <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                        <Github className="h-5 w-5" />
-                      </a>
-                    </Button>
-                  </div>
                 </CardContent>
               </Card>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          variants={fadeIn}
+          className="max-w-2xl mx-auto text-center"
+        >
+          <div className="bg-card border border-primary/20 rounded-sm p-8 red-glow">
+            <img
+              src="https://cdn.poehali.dev/projects/624cb9fa-8145-4312-a462-40d3b85c601b/files/ad015d0d-247b-494b-ae78-db5802fe4f54.jpg"
+              alt="Red4n Spider"
+              className="w-24 h-24 object-contain mx-auto mb-4 opacity-80"
+            />
+            <h3 className="font-black text-2xl text-foreground mb-2 uppercase tracking-wide">
+              Готов доминировать?
+            </h3>
+            <p className="text-muted-foreground text-sm mb-6">
+              Начни с дневного тарифа — убедись сам, потом бери навсегда.
+            </p>
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-white font-black uppercase tracking-widest red-glow"
+              asChild
+            >
+              <a href="https://t.me/red4n_bot" target="_blank" rel="noopener noreferrer">
+                <Icon name="Send" className="mr-2 h-5 w-5" />
+                Купить в Telegram
+              </a>
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

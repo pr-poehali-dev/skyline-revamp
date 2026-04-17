@@ -1,7 +1,6 @@
 import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Code, Lightbulb, Rocket } from "lucide-react"
+import Icon from "@/components/ui/icon"
 
 export default function About() {
   const fadeIn = {
@@ -9,9 +8,43 @@ export default function About() {
     visible: { opacity: 1, y: 0 },
   }
 
+  const advantages = [
+    {
+      icon: "Shield",
+      title: "Полная безопасность",
+      desc: "Наш софт использует передовые методы сокрытия. Обновляемся быстрее, чем работает античит.",
+    },
+    {
+      icon: "Zap",
+      title: "Нулевой фпс-дроп",
+      desc: "Оптимизированный инжектор — ты не почувствуешь разницы в производительности.",
+    },
+    {
+      icon: "Settings",
+      title: "Гибкая настройка",
+      desc: "Кастомизируй каждый параметр под свой стиль. Встроенный GUI прямо в игре.",
+    },
+    {
+      icon: "RefreshCw",
+      title: "Частые обновления",
+      desc: "Выходит обновление игры — обновление от нас уже через несколько часов.",
+    },
+    {
+      icon: "Headphones",
+      title: "Поддержка 24/7",
+      desc: "Помогаем с установкой, настройкой и любыми вопросами в любое время суток.",
+    },
+    {
+      icon: "Users",
+      title: "Закрытое сообщество",
+      desc: "Доступ в приватный Discord с 12 000+ пользователей, гайдами и конфигами.",
+    },
+  ]
+
   return (
-    <section id="about" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-24 bg-secondary/50 relative overflow-hidden">
+      <div className="spider-web opacity-50" />
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -20,114 +53,34 @@ export default function About() {
           variants={fadeIn}
           className="text-center mb-16"
         >
-          <Badge variant="outline" className="mb-4">
-            Обо мне
+          <Badge variant="outline" className="mb-4 border-primary/40 text-primary uppercase tracking-widest text-xs">
+            Почему Red4n
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Кто я</h2>
-          <div className="w-20 h-1 bg-primary mx-auto"></div>
+          <h2 className="text-3xl md:text-5xl font-black mb-4 text-foreground">
+            ПРЕВОСХОДСТВО <span className="text-primary">НА КАЖДОМ</span> СЕРВЕРЕ
+          </h2>
+          <div className="w-20 h-0.5 bg-primary mx-auto" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            variants={fadeIn}
-          >
-            <h3 className="text-2xl font-bold mb-4">Fullstack-разработчик с опытом 5+ лет</h3>
-            <p className="text-muted-foreground mb-6">
-              Меня зовут Алексей, я специализируюсь на создании веб-приложений «под ключ» —
-              беру проект от первых требований до финального запуска на продакшен.
-              Работаю как с молодыми стартапами, так и с устоявшимся бизнесом.
-            </p>
-            <p className="text-muted-foreground mb-6">
-              Главный принцип — код должен решать бизнес-задачу, а не просто работать.
-              Пишу чистую, понятную архитектуру, которую легко поддерживать и масштабировать.
-              За плечами — 40+ завершённых проектов в e-commerce, SaaS и корпоративном секторе.
-            </p>
-            <p className="text-muted-foreground">
-              В свободное время участвую в open-source, веду технический блог
-              и помогаю начинающим разработчикам войти в профессию.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {advantages.map((item, i) => (
             <motion.div
+              key={item.title}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
               variants={fadeIn}
             >
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-primary/10 p-3 rounded-full">
-                      <Code className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold mb-2">Чистый код</h4>
-                      <p className="text-muted-foreground">
-                        Пишу поддерживаемый, масштабируемый код. Документирую API,
-                        соблюдаю code review и стандарты индустрии.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="bg-card border border-border card-hover rounded-sm p-6 h-full">
+                <div className="bg-primary/10 w-12 h-12 rounded-sm flex items-center justify-center mb-4 border border-primary/20">
+                  <Icon name={item.icon} className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-lg font-black mb-2 text-foreground uppercase tracking-wide">{item.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+              </div>
             </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              variants={fadeIn}
-            >
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-primary/10 p-3 rounded-full">
-                      <Lightbulb className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold mb-2">Результат, а не процесс</h4>
-                      <p className="text-muted-foreground">
-                        Ориентируюсь на бизнес-результат: сроки, бюджет, рост конверсии.
-                        Предлагаю решения — не просто выполняю задачи.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              variants={fadeIn}
-            >
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-primary/10 p-3 rounded-full">
-                      <Rocket className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold mb-2">Запуск в срок</h4>
-                      <p className="text-muted-foreground">
-                        Слежу за дедлайнами и прозрачно веду коммуникацию на всех этапах.
-                        Заказчик всегда знает статус проекта.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
