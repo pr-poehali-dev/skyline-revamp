@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react"
+import { ArrowRight, Github, Linkedin, Send } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function Hero() {
   const [text, setText] = useState("")
-  const fullText = "Разработчик"
+  const roles = ["Fullstack-разработчик", "React-специалист", "Python-бэкенд", "Фрилансер"]
+  const [roleIndex, setRoleIndex] = useState(0)
 
   useEffect(() => {
     let i = 0
+    const currentRole = roles[roleIndex]
+    setText("")
+
     const typingInterval = setInterval(() => {
-      if (i < fullText.length) {
-        setText(fullText.substring(0, i + 1))
+      if (i < currentRole.length) {
+        setText(currentRole.substring(0, i + 1))
         i++
       } else {
         clearInterval(typingInterval)
+        setTimeout(() => {
+          setRoleIndex((prev) => (prev + 1) % roles.length)
+        }, 2000)
       }
-    }, 100)
+    }, 80)
 
     return () => clearInterval(typingInterval)
-  }, [])
+  }, [roleIndex])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -37,16 +44,17 @@ export default function Hero() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <p className="text-primary font-medium mb-2 tracking-wide uppercase text-sm">Открыт к новым проектам</p>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Привет, я <span className="text-primary">Алекс Морган</span>
+              Привет, я <span className="text-primary">Алексей Девченко</span>
             </h1>
             <h2 className="text-2xl md:text-3xl font-medium text-muted-foreground mb-6">
               <span className="text-foreground">{text}</span>
               <span className="animate-blink">|</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-lg">
-              Создаю качественные цифровые продукты с чистым кодом и современными технологиями.
-              Превращаю сложные задачи в элегантные решения.
+              Создаю быстрые и красивые веб-приложения под ключ — от идеи до запуска.
+              5+ лет опыта, более 40 успешных проектов для бизнеса и стартапов.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -55,7 +63,7 @@ export default function Hero() {
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button size="lg" variant="outline" onClick={() => scrollToSection("contact")}>
-                Связаться
+                Обсудить проект
               </Button>
             </div>
 
@@ -71,8 +79,8 @@ export default function Hero() {
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="rounded-full" asChild>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                  <Twitter className="h-5 w-5" />
+                <a href="https://t.me/" target="_blank" rel="noopener noreferrer">
+                  <Send className="h-5 w-5" />
                 </a>
               </Button>
             </div>
@@ -88,9 +96,13 @@ export default function Hero() {
             <div className="absolute inset-4 bg-muted rounded-full overflow-hidden">
               <img
                 src="/placeholder.svg?height=400&width=400"
-                alt="Алекс Морган"
+                alt="Алексей Девченко"
                 className="w-full h-full object-cover"
               />
+            </div>
+            <div className="absolute -bottom-4 -right-4 bg-background border border-border rounded-2xl px-4 py-3 shadow-lg">
+              <p className="text-sm font-semibold">40+ проектов</p>
+              <p className="text-xs text-muted-foreground">завершено успешно</p>
             </div>
           </motion.div>
         </div>
